@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    
+    <h3>General Info</h3>
+    {{ form.as_p }}
+
+    <h3>Products</h3>
+    {{ order_items.management_form }}
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Stock on Hand</th>
+                <th>Par Level (Optional)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item_form in order_items %}
+                <tr>
+                    <td>{{ item_form.product }}</td>
+                    <td>{{ item_form.stock_on_hand }}</td>
+                    <td>{{ item_form.par_level }}</td>
+                    {% if item_form.instance.pk %}{{ item_form.id }}{% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button type="submit">Create Order</button>
+</form>
+
+{% endblock %}
