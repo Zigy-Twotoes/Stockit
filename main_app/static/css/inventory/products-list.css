@@ -1,0 +1,53 @@
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    overflow: hidden; 
+    background-color: var(--card-bg);
+}
+
+li {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+li:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+li:hover {
+    background-color: rgba(52, 152, 219, 0.05); 
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+li strong {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+li span, li::after {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+li.empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-style: italic;
+}

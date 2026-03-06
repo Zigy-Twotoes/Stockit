@@ -1,10 +1,18 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block head %}
-
+    <link rel="stylesheet" href="{% static 'css/inventory/products-list.css' %}" />
 {% endblock %}
 
 {% block content %}
-<h1>List of all products</h1>
-
+    <h1>Product List</h1>
+    <ul>
+        {% for product in object_list %}
+            <li>
+                <strong>{{ product.name }}</strong> - Par: {{ product.par }}
+            </li>
+        {% empty %}
+            <li>No products found.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

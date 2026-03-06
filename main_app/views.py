@@ -4,7 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView
 from main_app.models import Product, OrderGuide, OrderList
 from django.forms import inlineformset_factory
-from django.views.generic import UpdateView, CreateView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
+from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+
 
 # Create your views here.
 def signup(request):
@@ -26,7 +29,28 @@ def signup(request):
 class Home(LoginView):
     template_name = 'home.html'
 
+class ProductListView(ListView):
+    model = Product
+    template_name = 'inventory/products-list.html'
 
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name', 'par']
+    template_name = 'inventory/products-form.html'
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ['name', 'par']
+    template_name = 'inventory/products-form.html'
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'inventory/products-details.html'
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'inventory/products-confirm-delete.html'
+    success_url = reverse_lazy('products-list')
 
 # Order Guide views
 OrderListForm = inlineformset_factory(

@@ -1,0 +1,92 @@
+.order-form-container {
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.order-header {
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--bg-color);
+    padding-bottom: 1rem;
+}
+
+.order-meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.order-sheet {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table th {
+    text-align: left;
+    padding: 1rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--bg-color);
+}
+
+.order-row td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--bg-color);
+}
+
+.stock-input input {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.stock-input input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    background: rgba(52, 152, 219, 0.05);
+}
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 4px;
+    background: var(--bg-color);
+    color: var(--text-muted);
+    font-weight: bold;
+}
+
+.badge.need-stock {
+    background: #d4edda;
+    color: #155724;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 12px;
+    font-size: 0.9rem;
+}

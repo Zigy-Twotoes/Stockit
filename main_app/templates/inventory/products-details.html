@@ -1,10 +1,31 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block head %}
-
+    <link rel="stylesheet" href="{% static 'css/inventory/products-details.css' %}" />
 {% endblock %}
 
 {% block content %}
-<h1>Products details</h1>
+<div class="detail-container">
+    <div class="detail-header">
+        <a href="{% url 'products-list' %}" class="back-link">← Back to Inventory</a>
+        <h1>Product Details</h1>
+    </div>
 
+    <div class="detail-card">
+        <div class="info-group">
+            <label>Product Name</label>
+            <p class="data-value">{{ object.name }}</p>
+        </div>
+        <div class="info-group">
+            <label>Current Par Level</label>
+            <p class="data-value">{{ object.par }}</p>
+        </div>
+        <div class="detail-actions">
+            <a href="{% url 'product-update' object.id %}" class="btn-edit">Edit Product</a>
+            <form action="{% url 'product-delete' object.id %}" method="get">
+                <button type="submit" class="btn-delete">Delete Product</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

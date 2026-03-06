@@ -1,39 +1,79 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% block head %}
-
+    <link rel="stylesheet" href="{% static 'css/orders/orders-create.css' %}" />
 {% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    
-    <h3>General Info</h3>
-    {{ form.as_p }}
+<div class="order-form-container">
+    <header class="order-header">
+        <h1>
+            {% if is_update %}
+                Edit Order: {{ guide.name }}
+            {% else %}
+                New Order: {{ guide.name }}
+            {% endif %}
+        </h1>
+        <p class="order-meta">
+            Order Date: 
+            {% if is_update %}
+                {{ order_date|date:"F d, Y" }}
+            {% else %}
+                {{ date|date:"F d, Y" }}
+            {% endif %}
+        </p>
+    </header>
 
-    <h3>Products</h3>
-    {{ order_items.management_form }}
-    <table>
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Stock on Hand</th>
-                <th>Par Level (Optional)</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item_form in order_items %}
+    <form method="post" class="order-sheet">
+        {% csrf_token %}
+        <table class="order-table">
+            <thead>
                 <tr>
-                    <td>{{ item_form.product }}</td>
-                    <td>{{ item_form.stock_on_hand }}</td>
-                    <td>{{ item_form.par_level }}</td>
-                    {% if item_form.instance.pk %}{{ item_form.id }}{% endif %}
+                    <th>Product</th>
+                    <th>Par Level</th>
+                    <th>Stock on Hand</th>
+                    <th>Suggested Order</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for item in order_items %}
+                <tr class="order-row">
+                    <td class="product-name">
+                        <strong>{{ item.product.name }}</strong>
+                    </td>
+                    <td class="par-level">
+                        {% if is_update %}
+                            {{ item.par_level }}
+                        {% else %}
+                            {{ item.product.par }}
+                        {% endif %}
+                    </td>
+                    <td class="stock-input">
+                        <input 
+                            type="number" 
+                            name="stock_{{ item.id }}" 
+                            value="{{ item.stock_on_hand|default:0 }}" 
+                            min="0">
+                    </td>
+                    <td class="suggested-val">
+                        <input
+                            type="number"
+                            name="quantity_{{ item.id }}"
+                            class="qt-override-input {% if item.suggested_order > 0 %}need-stock-input{% endif %}"
+                            value="{{ item.quantity_ordered|default:itme.suggested_order }}"
+                            min="0">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <button type="submit">Create Order</button>
-</form>
-
+        <div class="form-actions">
+            <button type="submit" class="btn-primary">
+                {% if is_update %}Update Order{% else %}Submit Order{% endif %}
+            </button>
+            <a href="{% url 'orders-history' %}" class="btn-secondary">Discard Changes</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

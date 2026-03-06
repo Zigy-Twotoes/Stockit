@@ -1,0 +1,51 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/orders/order-history.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="history-container">
+    <header class="page-header">
+        <h1>Order History</h1>
+        <p>Review past inventory submissions and stock levels.</p>
+    </header>
+
+    <div class="timeline">
+        {% regroup object_list by order_date as orders_by_date %}
+        
+        {% for date_group in orders_by_date %}
+            <div class="history-event">
+                <div class="event-marker"></div>
+                <div class="event-content">
+                    <div class="event-header">
+                        <h2 class="order-date">{{ date_group.grouper|date:"F d, Y" }}</h2>
+                        <span class="item-count">{{ date_group.list|length }} Products Logged</span>
+                    </div>
+                    
+                    <div class="event-preview">
+                        <p>
+                            Top items: 
+                            {% for item in date_group.list|slice:":3" %}
+                                {{ item.product.name }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                            {% if date_group.list|length > 3 %}...{% endif %}
+                        </p>
+                    </div>
+
+                    <div class="event-actions">
+                        <a href="{% url 'orders-detail' %}?date={{ date_group.grouper|date:'Y-m-d' }}" class="btn-view-detail">
+                            View Full Report
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="empty-history">
+                <p>No order history found. Start by placing a new order.</p>
+                <a href="{% url 'orders-create' %}" class="btn-primary">Create Order</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
