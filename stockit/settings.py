@@ -81,32 +81,32 @@ WSGI_APPLICATION = 'stockit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# if 'ON_HEROKU' in os.environ:
-#     DATABASES = {
-#         "default": dj_database_url.config(
-#             env='DATABASE_URL',
-#             conn_max_age=600,
-#             conn_health_checks=True,
-#             ssl_require=True,
-#         ),
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': 'stockit',
-#             # The value of 'NAME' should match the value of 'NAME' you replaced.
-#         }
-#     }
+if 'ON_HEROKU' in os.environ:
+    DATABASES = {
+        "default": dj_database_url.config(
+            env='DATABASE_URL',
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,
+        ),
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'stockit',
+            # The value of 'NAME' should match the value of 'NAME' you replaced.
+        }
+    }
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default="postgresql://localhost/stockit",
-        conn_max_age=600,
-        conn_health_checks=True,
-        ssl_require=bool(os.getenv("DATABASE_URL")),
-    )
-}
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default="postgresql://localhost/stockit",
+#         conn_max_age=600,
+#         conn_health_checks=True,
+#         ssl_require=bool(os.getenv("DATABASE_URL")),
+#     )
+# }
 
 
 # Password validation
