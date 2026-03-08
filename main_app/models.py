@@ -30,7 +30,6 @@ class OrderList(models.Model):
                 if self.product:
                     if not self.par_level:
                         self.par_level = self.product.par
-                    # Only set default if user left the input at 0
                     if self.quantity_ordered == 0:
                         self.quantity_ordered = max(0, self.par_level - self.stock_on_hand)
             except ObjectDoesNotExist:
