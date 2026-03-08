@@ -26,42 +26,45 @@
 
     <form method="post" class="order-sheet">
         {% csrf_token %}
+        {{ form.as_p }}
+        {{ order_items.management_form }}
         <table class="order-table">
             <thead>
                 <tr>
                     <th>Product</th>
                     <th>Par Level</th>
                     <th>Stock on Hand</th>
-                    <th>Suggested Order</th>
+                    <th>Order Quantity</th>
                 </tr>
             </thead>
             <tbody>
-                {% for item in order_items %}
-                <tr class="order-row">
+                {% for item_form in order_items %}
+                {{ item_form.id }}
+                <tr class="order-row">                    
+                    {% for hidden in item_form.hidden_fields %} {{ hidden }} {% endfor %}
+                    <input type="hidden" name="{{ item_form.prefix }}-product" value="{{ item_form.product_obj.id }}">
                     <td class="product-name">
-                        <strong>{{ item.product.name }}</strong>
+                        <strong>
+                            {% if item_form.instance.product %}
+                                {{ item_form.instance.product.name }}
+                            {% else %}
+                                {{ item_form.product_obj.name }}
+                            {% endif %}
+                        <strong>
+                        {{ item_form.product.as_hidden }}
                     </td>
                     <td class="par-level">
-                        {% if is_update %}
-                            {{ item.par_level }}
+                        {% if item_form.instance.product %}
+                            {{ item_form.instance.product.par }}
                         {% else %}
-                            {{ item.product.par }}
+                            {{ item_form.product_obj.par }}
                         {% endif %}
                     </td>
                     <td class="stock-input">
-                        <input 
-                            type="number" 
-                            name="stock_{{ item.id }}" 
-                            value="{{ item.stock_on_hand|default:0 }}" 
-                            min="0">
+                        {{ item_form.stock_on_hand }}
                     </td>
                     <td class="suggested-val">
-                        <input
-                            type="number"
-                            name="quantity_{{ item.id }}"
-                            class="qt-override-input {% if item.suggested_order > 0 %}need-stock-input{% endif %}"
-                            value="{{ item.quantity_ordered|default:itme.suggested_order }}"
-                            min="0">
+                        {{ item_form.quantity_ordered }}
                     </td>
                 </tr>
                 {% endfor %}

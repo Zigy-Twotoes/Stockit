@@ -1,38 +1,88 @@
 :root {
     --primary-color: #2c3e50;    
-    --accent-color: #3498db;     
+    --accent-color: #28a745;     
     --danger-color: #e74c3c;     
     --bg-color: #f4f7f6;         
-    --card-bg: #ffffff;   
-    --text-main: #333333;
-    --text-muted: #7f8c8d;
+    --text-light: #ecf0f1;
     --font-family: 'Segoe UI', Roboto, sans-serif;
-    --sidebar-width: 240px;
-    --border-radius: 8px;
-    --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 body {
     font-family: var(--font-family);
     background-color: var(--bg-color);
-    color: var(--text-main);
+    margin: 0; 
 }
 
-header {
+.main-header {
     background-color: var(--primary-color);
+    padding: 20px 0 10px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-nav {
-    width: var(--sidebar-width);
-    background-color: var(--card-bg);
-    border-right: 1px solid #ddd;
+.header-container .logo {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-light);
+    text-decoration: none;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 15px;
 }
 
-nav ul li a:hover {
+.header-container .logo::after {
+    content: ".";
+    color: var(--accent-color);
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center; /* Centers the links horizontally */
+    gap: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1); /* Subtle separator */
+}
+
+.main-nav li {
+    border-bottom: none;
+}
+
+.main-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
     color: var(--accent-color);
 }
 
 #logout-form button {
+    background: transparent;
+    border: 1px solid var(--danger-color);
     color: var(--danger-color);
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+#logout-form button:hover {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 

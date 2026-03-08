@@ -5,14 +5,18 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Product List</h1>
-    <ul>
+    <h1 class="page-title">Product List</h1>
+    
+    <ul class="inventory-list">
         {% for product in object_list %}
-            <li>
-                <strong>{{ product.name }}</strong> - Par: {{ product.par }}
+            <li class="product-item">
+                <a href="{% url 'products-detail' product.id %}" class="product-link">
+                    <strong class="product-name">{{ product.name }}</strong>
+                </a>
+                <span class="product-par">Par: {{ product.par }}</span>
             </li>
         {% empty %}
-            <li>No products found.</li>
+            <li class="product-item empty-state">No products found.</li>
         {% endfor %}
     </ul>
 {% endblock %}

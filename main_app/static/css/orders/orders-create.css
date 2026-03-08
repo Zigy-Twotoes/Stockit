@@ -90,3 +90,18 @@
     padding: 12px;
     font-size: 0.9rem;
 }
+
+.suggested-val input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.hint {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}

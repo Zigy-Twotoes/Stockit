@@ -16,7 +16,7 @@
             {% csrf_token %}
             <div class="delete-actions">
                 <button type="submit" class="btn-confirm-delete">Yes, Delete Permanently</button>
-                <a href="{% url 'product-detail' object.id %}" class="btn-cancel">No, Keep Product</a>
+                <a href="{% url 'products-detail' object.id %}" class="btn-cancel">No, Keep Product</a>
             </div>
         </form>
     </div>

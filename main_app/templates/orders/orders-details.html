@@ -7,45 +7,52 @@
 {% block content %}
 <div class="detail-container">
     <div class="management-btns">
-        <a href="{% url 'orders-history' %}" class="back-link">← Back to History</a>
-        <button onclick="window.print()" class="btn-print">Print Order</button>
-        <a href="{% url 'orders-update' order_date|date:'Y-m-d' %}" class="btn-edit-order">
-            Edit This Order
+        <a href="{% url 'orders-history' %}" class="back-link">
+            <span class="icon">←</span> Back to History
         </a>
-        <a href="{% url 'order-delete' order_date|date:'Y-m-d' %}" class="btn-delete-order">
-            Delete Log
-        </a>
+        <div class="action-group">
+            <a href="{% url 'orders-update' order.id %}" class="btn btn-edit">
+                Edit Order
+            </a>
+            <a href="{% url 'orders-delete' order.id %}" class="btn btn-delete">
+                Delete Log
+            </a>
+        </div>
     </div>
+    <h1>Order Summary: {{ order.name }}</h1>
+    <p class="order-date-label">
+        Items recorded on: <strong>{{ order.order_date|date:"F d, Y" }}</strong>
+    </p>
 
-    <h1>Order Summary</h1>
-    <p class="order-date-label">Items recorded on: <strong>{{ order_date|date:"F d, Y" }}</strong></p>
-
-    <div class="order-list-wrapper">
-        <ul class="order-list">
-            <li class="list-header">
-                <span class="col-product">Product</span>
-                <span class="col-data">Par</span>
-                <span class="col-data">On Hand</span>
-                <span class="col-data text-right">Order Qty</span>
-            </li>
-
-            {% for item in items %}
-            <li class="order-item {% if item.quantity_ordered > 0 %}active-order{% endif %}">
-                <span class="col-product">
-                    <strong>{{ item.product.name }}</strong>
-                </span>
-                <span class="col-data">{{ item.par_level }}</span>
-                <span class="col-data">{{ item.stock_on_hand }}</span>
-                <span class="col-data text-right qty-val">
-                    {% if item.quantity_ordered > 0 %}
-                        <span class="qty-badge">+{{ item.quantity_ordered }}</span>
-                    {% else %}
-                        <span class="no-qty">—</span>
-                    {% endif %}
-                </span>
-            </li>
-            {% endfor %}
-        </ul>
+    <div class="order-table-wrapper">
+        <table class="order-summary-table">
+            <thead>
+                <tr>
+                    <th class="col-product">Product</th>
+                    <th class="col-data">Par</th>
+                    <th class="col-data">On Hand</th>
+                    <th class="col-data text-right">Order Qty</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.orderlist_set.all %}
+                <tr class="order-row {% if item.quantity_ordered > 0 %}active-order{% endif %}">
+                    <td class="col-product">
+                        <strong>{{ item.product.name }}</strong>
+                    </td>
+                    <td class="col-data" style="text-align: center;">{{ item.par_level }}</td>
+                    <td class="col-data" style="text-align: center;">{{ item.stock_on_hand }}</td>
+                    <td class="col-data text-right qty-val" style="text-align: center;">
+                        {% if item.quantity_ordered > 0 %}
+                            <span class="qty-badge">+{{ item.quantity_ordered }}</span>
+                        {% else %}
+                            <span class="no-qty">—</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

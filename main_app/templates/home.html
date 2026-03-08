@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Stock It</h1>
-
+<h2 style="text-align: center;">Welcome to Stock It</h2>
+<p style="text-align: center;">An app to track all your order needs</p>
 {% if not user.is_authenticated %}
   <section>
     <form action="{% url 'home' %}" method="post" class="login">

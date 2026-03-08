@@ -1,126 +1,134 @@
 .detail-container {
     max-width: 900px;
     margin: 2rem auto;
+    font-family: sans-serif;
 }
 
-.detail-header-actions {
+.management-btns {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.action-group {
+    display: flex;
+    gap: 12px;
 }
 
 .back-link {
     text-decoration: none;
-    color: var(--accent-color);
-    font-weight: 500;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--primary-color);
+    transform: translateX(-4px);
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none !important; /* Forces removal of underline */
+    border-radius: var(--border-radius);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    line-height: 1.2;
+}
+
+.btn-edit {
+    background-color: var(--accent-color);
+    color: #ffffff !important;
+    box-shadow: 0 4px 6px rgba(52, 152, 219, 0.15);
+}
+
+.btn-edit:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(52, 152, 219, 0.25);
+}
+
+.btn-delete {
+    background-color: var(--danger-color);
+    color: #ffffff !important;
+    box-shadow: 0 4px 6px rgba(231, 76, 60, 0.15);
+}
+
+.btn-delete:hover {
+    background-color: var(--danger-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(231, 76, 60, 0.25);
 }
 
 h1 {
     color: var(--primary-color);
-    margin: 0;
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
 }
 
 .order-date-label {
     color: var(--text-muted);
     margin-bottom: 2rem;
+    font-size: 1.1rem;
 }
 
-.order-list-wrapper {
-    background-color: var(--card-bg);
-    border: 1px solid #ddd;
+.order-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border: 1px solid #eee;
     border-radius: var(--border-radius);
     overflow: hidden;
 }
 
-.order-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.list-header, .order-item {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    padding: 15px 20px;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-}
-
-.list-header {
+.order-summary-table th {
     background-color: #f8f9fa;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
     color: var(--text-muted);
-    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
 }
 
-.order-item:last-child {
-    border-bottom: none;
-}
-
-.order-item:hover {
-    background-color: rgba(52, 152, 219, 0.03);
-}
-
-.active-order {
-    background-color: rgba(39, 174, 96, 0.05);
-}
-
-.col-product strong {
-    color: var(--primary-color);
-    font-size: 1rem;
-}
-
-.col-data {
-    text-align: center;
+.order-summary-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
     color: var(--text-main);
 }
 
-.text-right {
-    text-align: right;
+.order-row:hover {
+    background-color: rgba(52, 152, 219, 0.02);
 }
+
+.order-row.active-order {
+    background-color: #f0fdf4;
+}
+
+.text-right { text-align: right; }
 
 .qty-badge {
-    background-color: #d4edda;
-    color: #155724;
-    padding: 4px 10px;
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
     border-radius: 4px;
-    font-weight: 700;
-}
-
-.no-qty {
-    color: #ccc;
-}
-
-.btn-print {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.btn-edit-order {
-    text-decoration: none;
-    background-color: var(--accent-color);
-    color: white;
-    padding: 8px 16px;
-    border-radius: var(--border-radius);
+    font-weight: bold;
     font-size: 0.85rem;
-    font-weight: 600;
-    transition: opacity 0.2s;
 }
 
-.btn-edit-order:hover {
-    opacity: 0.9;
-}
+.no-qty { color: #ccc; }
 
 @media print {
-    nav, header, .btn-print, .back-link { display: none !important; }
-    .detail-container { margin: 0; }
-    .order-list-wrapper { border: none; }
+    nav, header, .management-btns, .back-link { display: none !important; }
+    .detail-container { margin: 0; max-width: 100%; }
+    .order-summary-table { border: 1px solid #000; }
 }

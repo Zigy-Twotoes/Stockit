@@ -21,8 +21,8 @@
             <p class="data-value">{{ object.par }}</p>
         </div>
         <div class="detail-actions">
-            <a href="{% url 'product-update' object.id %}" class="btn-edit">Edit Product</a>
-            <form action="{% url 'product-delete' object.id %}" method="get">
+            <a href="{% url 'products-update' object.id %}" class="btn-edit">Edit Product</a>
+            <form action="{% url 'products-delete' object.id %}" method="get">
                 <button type="submit" class="btn-delete">Delete Product</button>
             </form>
         </div>
