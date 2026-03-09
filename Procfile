@@ -1,1 +1,1 @@
-web: gunicorn stock_it_app.wsgi
+web: gunicorn stockit.wsgi
