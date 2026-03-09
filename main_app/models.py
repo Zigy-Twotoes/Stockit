@@ -35,11 +35,3 @@ class OrderList(models.Model):
             except ObjectDoesNotExist:
                 pass
         super().save(*args, **kwargs)
-    # @property
-    # def suggested_order(self):
-    #     try:
-    #         par = self.par_level if self.par_level is not None else self.product.par
-    #         stock = self.stock_on_hand if self.stock_on_hand is not None else 0
-    #         return max(0, par - stock)
-    #     except:
-    #         return 0
