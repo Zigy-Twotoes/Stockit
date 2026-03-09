@@ -103,8 +103,8 @@ class OrderGuideCreateView(CreateView):
         return context
     
     def form_valid(self, form):
-        form_data = self.get_context_data()
-        order_items = form_data['order_items']
+        context = self.get_context_data()
+        order_items = context['order_items']
         form.instance.user = self.request.user
 
         if form.is_valid() and order_items.is_valid():
