@@ -1,6 +1,10 @@
 # Stock It - Inventory & Order Management System
 
+![Stock It Logo](./main_app/static/images/Stockit.png)
+
 **Stock It** is a Django-based web application designed to streamline inventory tracking and automated ordering. It allows businesses to manage stock levels, calculate order quantities based on "Par Levels," and maintain a history of past orders. 
+
+**Deployment Link** - [Stock It App](https://stock-it-app-0249e8108276.herokuapp.com/)
 
 ---
 
